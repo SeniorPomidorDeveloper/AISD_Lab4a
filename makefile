@@ -28,3 +28,4 @@ compile_main_libs:
 	make -f $(PATH_LIB_FILES)./libs/compare/makefile ARG=$(PATH_LIB_FILES)libs/compare/ 'compile_lib'
 	make -f $(PATH_LIB_FILES)./libs/import/makefile ARG=$(PATH_LIB_FILES)libs/import/ 'compile_lib'
 	make -f $(PATH_LIB_FILES)./libs/interface/makefile ARG=$(PATH_LIB_FILES)libs/interface/ 'compile_lib'
+	make -f $(PATH_LIB_FILES)./libs/export/makefile ARG=$(PATH_LIB_FILES)libs/export/ 'compile_lib'

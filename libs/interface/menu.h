@@ -11,6 +11,8 @@ int bypass_menu(Bin_tree * tree);
 
 int individual_menu(Bin_tree *tree);
 
+int export_menu(Bin_tree *tree);
+
 int main_menu(Bin_tree *tree);
 
 #endif // MENU_H

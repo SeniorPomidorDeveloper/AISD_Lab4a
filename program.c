@@ -26,12 +26,12 @@ int new_tree_menu(Bin_tree **tree)
     return init_Bin_tree(tree, compare);
 }
 
-bool check_option_input_menu(long long int num)
+bool check_option_input_menu(const long long int num)
 {
-    return num >= 0 && num <= 2;
+    return num > 0 && num <= 2;
 }
 
-bool check_result_input_menu(int result)
+bool check_result_input_menu(const int result)
 {
     return result <= WARNING_FILE_READ;
 }
@@ -40,7 +40,6 @@ void print_input_menu()
 {
     printf("1. Импортировать дерево из текстового файла\n");
     printf("2. Создать новое дерево\n");
-    printf("0. Выход\n");
 }
 
 int input_tree(Bin_tree **tree)
@@ -49,7 +48,6 @@ int input_tree(Bin_tree **tree)
     int (*function[]) (Bin_tree **table) = {import_menu, new_tree_menu};
     print_input_menu();
     if (GetLLInt(&option, "Введите пункт меню: ", check_option_input_menu) == EOF) return EOF; 
-    if (option == 0) return SUCCESS;
     int result = function[option - 1](tree);
     if (!check_result_input_menu(result)) return result;
     return SUCCESS;

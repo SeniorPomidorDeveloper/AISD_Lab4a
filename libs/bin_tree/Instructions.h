@@ -9,7 +9,7 @@ typedef enum Side
 
 typedef enum Find_status
 {
-    FOUND=2,
+    FOUND=6,
     NOT_FOUND
 } Find_status;
 

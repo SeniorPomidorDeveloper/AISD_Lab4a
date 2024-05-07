@@ -238,7 +238,7 @@ Error_code reverse_bypass(const Bin_tree *tree, Iter_Bin_tree_arr **arr)
     if (arr == NULL) return ERROR_ALLOCATION;
     (*arr)->len = 0;
     size_t capacity = 1;
-    for (size_t i = 0; i < tree->height; i++) capacity *= 2;
+    for (size_t i = 0; i < tree->height + 1; i++) capacity *= 2;
     (*arr)->arr = (Iter_Bin_tree *) malloc((capacity - 1) * sizeof(Iter_Bin_tree));
     if ((*arr)->arr == NULL) return ERROR_ALLOCATION;
     Iter_Bin_tree iter = get_root_Bin_tree(tree);
@@ -272,14 +272,13 @@ Iter_Bin_tree max_Bin_tree(const Bin_tree *tree)
 
 void free_Bin_tree(Bin_tree *tree)
 {
-    Iter_Bin_tree_arr *arr;
-    reverse_bypass(tree, &arr);
-    for (size_t i = 0; i < arr->len; i++) 
+    Iter_Bin_tree iter = max_Bin_tree(tree);
+    while (iter != NULL)
     {
-        free(arr->arr[i]->info);
-        free(arr->arr[i]);
+        free(iter->info);
+        Iter_Bin_tree prev = iter;
+        iter = iter->next;
+        free(prev);
     }
-    free(arr->arr);
-    free(arr);
     free(tree);
 }

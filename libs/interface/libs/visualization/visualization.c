@@ -25,14 +25,6 @@ void consol_print_tree(Bin_tree *tree)
         size_t height;
         get_height(tree, max, &height);
         height = height * (1 + max_len_num);
-        // for (size_t i = 0; i < height - 3 * (height >= 3); i++) printf(" ");
-        // if (max->parent != NULL)
-        // {
-        //     if (max->parent->right == max) printf(" / ");
-        //     else printf(" \\ ");
-        // }
-        // printf("%llu\n", max->key);
-        // max = max->next;
         if (max->parent != NULL)
         {
             if (max->parent->right == max) 

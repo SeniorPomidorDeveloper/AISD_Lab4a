@@ -6,6 +6,7 @@
 #include "./libs/gets/gets.h"
 #include "./libs/input/input.h"
 #include "./libs/visualization/visualization.h"
+#include "../export/export.h"
 
 int find_menu(Bin_tree *tree)
 {
@@ -94,12 +95,24 @@ int bypass_menu(Bin_tree * tree)
     return SUCCESS;
 }
 
-bool check_option(long long int option)
+int export_menu(Bin_tree *tree)
 {
-    return option >= 0 && option <= 5;
+    char *path;
+    if (input(&path, "\t> Введите путь до файла: ") == EOF) return EOF;
+    int result = export_graph(tree, path);
+    free(path);
+    if (result != SUCCESS) printf("\t[ERROR] Запись завершилась ошибкой!\n");
+    else printf("\tЗапись завершилась успешно.\n");
+    return result;
+
 }
 
-bool check_result_menu(int result)
+bool check_option(const long long int option)
+{
+    return option >= 0 && option <= 6;
+}
+
+bool check_result_menu(const int result)
 {
     return result == SUCCESS || result == NOT_FOUND || result == FOUND;
 }
@@ -111,13 +124,14 @@ void print_menu()
     printf("3. Удаление узла\n");
     printf("4. Нахождение узла с максимальным значением ключа\n");
     printf("5. Обход дерева в обратном порядке\n");
+    printf("6. Экспорт дерева для Graphviz\n");
     printf("0. Выход\n");
 }
 
 int main_menu(Bin_tree *tree)
 {
     long long int option;
-    int (*function[]) (Bin_tree *table) = {find_menu, add_menu, del_menu, individual_menu, bypass_menu};
+    int (*function[]) (Bin_tree *table) = {find_menu, add_menu, del_menu, individual_menu, bypass_menu, export_menu};
     do 
     {
         consol_print_tree(tree);
